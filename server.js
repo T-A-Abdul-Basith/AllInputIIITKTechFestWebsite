@@ -11,11 +11,11 @@ var server = http.createServer((req, res) => {
 			res.writeHead(200, {'Content-Type': 'text/html'});
 			res.end(webpage);
 			return;
-		} else if (req.url == "/favicon.ico") {
+		} else if (req.url == "/favicon.ico" || req.url == "/favicon.ico/") {
 			res.writeHead(200, {'Content-Type': 'image/x-icon'});
 			res.end(icon);
 			return;
-		} else if (req.url == "/title") {
+		} else if (req.url == "/title" || req.url == "/title/") {
 			res.writeHead(200, {'Content-Type': 'image/png'});
 			res.end(title);
 			return;
