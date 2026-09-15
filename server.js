@@ -1,15 +1,13 @@
 const http = require("http"),
 	fs = require("fs");
 
-
+var webpage = fs.readFileSync(__dirname + "/index.html");
 var icon = fs.readFileSync(__dirname + "/favicon.ico");
 var title = fs.readFileSync(__dirname + "/Elix\ Title.png");
-
 
 var server = http.createServer((req, res) => {
 	if (req.method == 'GET') {
 		if (req.url == "/") {
-var webpage = fs.readFileSync(__dirname + "/index.html"); // TODO place at start of file
 			res.writeHead(200, {'Content-Type': 'text/html'});
 			res.end(webpage);
 			return;
@@ -28,4 +26,23 @@ var webpage = fs.readFileSync(__dirname + "/index.html"); // TODO place at start
 	res.end('Not Found');
 });
 
-server.listen(8080, "0.0.0.0", () => { console.log("Server online!"); });
+process.on("SIGINT", () => {
+	console.log("Shutting Down...");
+	server.close((err) => {
+		if (err) {
+			console.log(err);
+		}
+		console.log("Server Offline");
+	});
+});
+
+process.on("SIGTERM", () => {
+	console.log("Shutting Down...");
+	server.close((err) => {
+		if (err) {
+			console.log(err);
+		}
+		console.log("Server Offline");
+	});
+});
+server.listen(process.env.PORT, "0.0.0.0", () => { console.log("Server online!"); });
