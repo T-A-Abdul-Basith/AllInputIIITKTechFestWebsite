@@ -1,0 +1,150 @@
+<html>
+	<head>
+		<title>AllInPut</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&family=Alex+Brush&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+		<style>
+			* {
+				font-family: "Merriweather", serif;
+			}
+
+			body {
+				margin: 0;
+				padding: 0;
+			}
+
+			.bg {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+			}
+
+			#slide1 {
+				background-color: black;
+			}
+
+			#slide2 {
+				background-image: linear-gradient(in lab to bottom, black, white);
+			}
+
+			#slide3 {
+				background-color: white;
+				align-items: space-between;
+			}
+
+			#maintitle {
+				font-family: "Alex Brush", cursive;
+				color: white;
+				opacity: 0;
+				font-size: 5rem;
+				text-decoration: underline;
+				animation: slideIn 2s ease-in-out forwards;
+			}
+
+			#scrollprompt {
+				color: gray;
+				opacity: 0;
+				font-size: 2rem;
+				animation: slideIn 2s ease-in-out 1s forwards;
+			}
+
+			@keyframes slideIn {
+				0% {
+					transform: translateY(100px); opacity: 0;
+				}
+				100% {
+					transform: translateY(50px); opacity: 1;
+				}
+			}
+
+			#mainpage {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: center; 
+				text-align: center;
+				width: 80vw;
+				height: 80vh;
+			}
+
+			#titlebox {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				width: 100%;
+				opacity: 0;
+			}
+
+			#titleimg {
+				align-self: flex-start;
+			}
+
+			#venue {
+				align-self: flex-end;
+				text-align: right;
+				font-size: 1.5rem;
+				opacity: 0;
+			}
+
+			#paragraph {
+				font-size: 2.25rem;
+				opacity: 0;
+			}
+
+			.is-visible {
+				animation: slideIn 2s ease-in-out forwards;
+			}
+
+			#footer {
+				color: #22222222;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="bg" id="slide1">
+			<h1 id="maintitle">AllInPut</h1>
+			<span id="scrollprompt">Scroll Down...</span>
+		</div>
+		<div class="bg" id="slide2"></div>
+		<div class="bg" id="slide3">
+			<div class="inv" id="mainpage">
+				<div class="inv scroll" id="titlebox">
+					<img src="/title">
+				</div>
+				<div class="scroll" id="paragraph">
+					Can you build an exceptional electronics project from parts you buy at an auction?<br>
+					Join us as we hold the auction and do your best to win the prize pool of &#8377;20k<br>
+					<a onclick="alert('Link Unavailable :(');" href="">Press to Register</a>
+				</div>
+				<div class="scroll" id="venue">
+					On: Oct 10th / Oct 11th<br>
+					At: Indian Institute of Information Technology, Kottayam (Valavoor P.O.)
+				</div>
+				<p class="scroll" id="footer">By T. A. Abdul Basith, Fonts: (Merriweather by Sorkin Type, Alex Brush by Robert Leuschke)</p>
+			</div>
+		</div>
+		<script>
+			const options = {
+				root: null, rootMargin: '0px', threshold: 0.1
+			};
+
+			const callback = (entries, observer) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('is-visible');
+						observer.unobserve(entry.target);
+    					}
+				});
+			};
+
+			const observer = new IntersectionObserver(callback, options);
+
+			const targets = document.querySelectorAll('.scroll');
+			targets.forEach(target => observer.observe(target));
+		</script>
+	</body>
+</html>
