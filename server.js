@@ -3,7 +3,6 @@ const http = require("http"),
 
 var webpage = fs.readFileSync(__dirname + "/index.html");
 var icon = fs.readFileSync(__dirname + "/favicon.ico");
-var title = fs.readFileSync(__dirname + "/title.png");
 
 var server = http.createServer((req, res) => {
 	if (req.method == 'GET') {
@@ -14,10 +13,6 @@ var server = http.createServer((req, res) => {
 		} else if (req.url == "/favicon.ico" || req.url == "/favicon.ico/") {
 			res.writeHead(200, {'Content-Type': 'image/x-icon'});
 			res.end(icon);
-			return;
-		} else if (req.url == "/title" || req.url == "/title/") {
-			res.writeHead(200, {'Content-Type': 'image/png'});
-			res.end(title);
 			return;
 		}
 	}
