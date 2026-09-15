@@ -3,7 +3,7 @@ const http = require("http"),
 
 var webpage = fs.readFileSync(__dirname + "/index.html");
 var icon = fs.readFileSync(__dirname + "/favicon.ico");
-var title = fs.readFileSync(__dirname + "/Elix\ Title.png");
+var title = fs.readFileSync(__dirname + "/title.png");
 
 var server = http.createServer((req, res) => {
 	if (req.method == 'GET') {
@@ -45,4 +45,4 @@ process.on("SIGTERM", () => {
 		console.log("Server Offline");
 	});
 });
-server.listen(process.env.PORT, "0.0.0.0", () => { console.log("Server online!"); });
+server.listen(process.env.PORT || 8080, "0.0.0.0", () => { console.log("Server online!"); });
