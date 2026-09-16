@@ -40,4 +40,5 @@ process.on("SIGTERM", () => {
 		console.log("Server Offline");
 	});
 });
+
 server.listen(process.env.PORT || 8080, "0.0.0.0", () => { console.log("Server online!"); });
